@@ -1,6 +1,12 @@
 let selectedCards = [];
 let selectedTheme = ''; // Tema seleccionado por el usuario
-
+let data = {
+    name: "",
+    theme: "",
+    number: "",
+    codeCountry: "",
+    descriptions: ""
+};
    // Función para iniciar las cartas y mezclar imágenes
 function startTarot(theme) {
     document.getElementById('startContainer').style.display = 'none';
@@ -246,6 +252,7 @@ function startTarot(theme) {
 
 ];
 
+    obtenerDatos("theme", theme);
 
    // Selección de descriptionses basadas en el tema
    const selectedCardData = cardData.map(card => {
@@ -292,12 +299,11 @@ function selectCard(event) {
 
         event.target.style.transform += ' scale(1.2)';
         selectedCards.push({
-                    image: event.target.dataset.image,
-                    name: event.target.dataset.name,
-                    descriptions: event.target.dataset.descriptions.split('.,')
-                });
+            image: event.target.dataset.image,
+            name: event.target.dataset.name,
+            descriptions: event.target.dataset.descriptions.split('.,')
+        });
         event.target.style.pointerEvents = 'none'; // Evitar seleccionar la misma carta nuevamente
-
         // Revela la imagen de la carta seleccionada con un efecto de giro
         setTimeout(() => {
             event.target.style.backgroundImage = `url('${event.target.dataset.image}')`;
@@ -310,7 +316,6 @@ function selectCard(event) {
             setTimeout(() => {
                 // Recoge todas las cartas en un mazo más compacto y desplázalas hacia abajo
                 const allCards = Array.from(document.querySelectorAll('.card'));
-
                 allCards.forEach((card, index) => {
                     // Agrupa las cartas en un mazo compacto
                     card.style.transform = `translateY(${index * -5}px) rotate(0deg) scale(1)`;
@@ -354,59 +359,56 @@ function displayResult() {
         }, 100);
 
        // Crear las cartas seleccionadas en el contenedor de resultados
-const selectedCardsContainer = document.getElementById('selectedCardsContainer');
-selectedCardsContainer.innerHTML = ''; // Limpiar contenedor de cartas seleccionadas
+    const selectedCardsContainer = document.getElementById('selectedCardsContainer');
+    selectedCardsContainer.innerHTML = ''; // Limpiar contenedor de cartas seleccionadas
 
-// Mostrar nombres de las cartas seleccionadas en una sola línea
-const selectedCardNames = document.getElementById('selectedCardNames');
-selectedCardNames.innerHTML = ''; // Limpiar nombres anteriores
+    // Mostrar nombres de las cartas seleccionadas en una sola línea
+    const selectedCardNames = document.getElementById('selectedCardNames');
+    selectedCardNames.innerHTML = ''; // Limpiar nombres anteriores
 
-let namesText = selectedCards.map(card => card.name).join(' - ');
-selectedCardNames.textContent = namesText; // Mostrar todos los nombres en una sola línea
+    let namesText = selectedCards.map(card => card.name).join(' - ');
+    selectedCardNames.textContent = namesText; // Mostrar todos los nombres en una sola línea
 
 // Mostrar una descripción aleatoria de cada carta seleccionada en una sola línea
-const descriptions = document.getElementById('descriptions');
-descriptions.innerHTML = ''; // Limpiar contenedor de la descripción
-// Función para seleccionar una descripción aleatoria y evitar elementos vacíos
-let descriptionsText = selectedCards
-     .map(card => {
-         if (card.descriptions && card.descriptions.length > 0) {
-             const randomIndex = Math.floor(Math.random() * card.descriptions.length);
-             return card.descriptions[randomIndex].trim();
-         }
-         return null;
-     })
-     .filter(description => description)
-     .map(description => description.endsWith('.') ? description : description + '.')
-     .join('  '); // Concatenar descripciones
-descriptions.textContent = descriptionsText; // Mostrar descripciones en una sola línea
+    const descriptions = document.getElementById('descriptions');
+    descriptions.innerHTML = ''; // Limpiar contenedor de la descripción
+    // Función para seleccionar una descripción aleatoria y evitar elementos vacíos
+    let descriptionsText = selectedCards.map(card => {
+        if (card.descriptions && card.descriptions.length > 0) {
+            const randomIndex = Math.floor(Math.random() * card.descriptions.length);
+            return card.descriptions[randomIndex].trim();
+        }
+        return null;
+    }).filter(description => description).map(description => description.endsWith('.') ? description : description + '.').join('  '); // Concatenar descripciones
+
+    descriptions.textContent = descriptionsText; // Mostrar descripciones en una sola línea
 // Añadir cada carta seleccionada al contenedor con un efecto "flip" escalonado
-selectedCards.forEach((card, index) => {
-    // Crear un nuevo elemento para cada carta
-    const newCard = document.createElement('div');
-    newCard.classList.add('selected-card');
-    newCard.style.opacity = 0; // Inicialmente invisible
-
-    // Asignar imagen de fondo específica para la carta seleccionada
-    newCard.style.backgroundImage = `url('${card.image}')`;
-    newCard.style.backgroundSize = 'cover'; // Asegurar que la imagen cubra toda la carta
-    selectedCardsContainer.appendChild(newCard);
-
+    obtenerDatos("descriptions", descriptionsText);
+    console.log(descriptionsText);
+    selectedCards.forEach((card, index) => {
+        
+        // Crear un nuevo elemento para cada carta
+        const newCard = document.createElement('div');
+        newCard.classList.add('selected-card');
+        newCard.style.opacity = 0; // Inicialmente invisible
+        // Asignar imagen de fondo específica para la carta seleccionada
+        newCard.style.backgroundImage = `url('${card.image}')`;
+        newCard.style.backgroundSize = 'cover'; // Asegurar que la imagen cubra toda la carta
+        selectedCardsContainer.appendChild(newCard);
     // Configurar el efecto "flip" escalonado
-    setTimeout(() => {
-        newCard.classList.add('flip');
-        newCard.style.opacity = 1;
-        newCard.style.transition = 'transform 1s ease, opacity 1s';
-        newCard.style.transform = 'rotateY(-180deg)'; // Giro único
-    }, index * 600); // Intervalo entre cartas para el efecto escalonado
-});
+        setTimeout(() => {
+            newCard.classList.add('flip');
+            newCard.style.opacity = 1;
+            newCard.style.transition = 'transform 1s ease, opacity 1s';
+            newCard.style.transform = 'rotateY(-180deg)'; // Giro único
+        }, index * 600); // Intervalo entre cartas para el efecto escalonado
+    });
 
     }, 800);
+    console.log(data);
 }
 
-//INICIO DEL PROCESO DE MENSAJERIA
-
-
+//Inicio de la mensajería
 const nameInput = document.getElementById("nameInput");
 
 nameInput.addEventListener("keydown", (event) => {
@@ -422,6 +424,7 @@ phoneInput.addEventListener("keydown", (event) => {
         submitPhone();
     }
 });
+
 function nuevaPantalla(){
     window.addEventListener("load", () => {
         const formContainer = document.getElementById("formContainer");
@@ -436,10 +439,9 @@ function nuevaPantalla(){
 }
 
 function startMensajeria() {
-    document.getElementById('resultContainer').style.display = 'none';
-
     const name = document.getElementById("nameInput").value.trim();
     const nameErrorMessage = document.getElementById("nameErrorMessage");
+    nameErrorMessage.classList.add("none");
 
     // Verifica si el nombre tiene menos de 3 caracteres
     if (name.length < 3) {
@@ -450,7 +452,8 @@ function startMensajeria() {
         nameErrorMessage.classList.remove("show"); // Oculta el mensaje de error
         nameErrorMessage.classList.add("none");
     }
-
+    obtenerDatos("name", name);
+    console.log(name);
     // Continúa con la siguiente pantalla si el nombre es válido
     document.getElementById("formContainer").classList.remove("show"); // Ocultar pantalla 
     setTimeout(() => {
@@ -466,13 +469,14 @@ function validatePhone() {
     const phone = phoneInput.value;
     // Elimina cualquier caracter no numérico
     phoneInput.value = phone.replace(/\D/g, '');
+    console.log(phoneInput)
 }
 
 function submitPhone() {
     const countryCode = document.getElementById("countryCode").value;
     const phone = document.getElementById("phoneInput").value;
     const errorMessage = document.getElementById("errorMessage");
-
+    
     // Verifica si el indicativo está vacío
     if (!countryCode) {
         errorMessage.classList.add("show"); // Mostrar mensaje de error
@@ -493,6 +497,62 @@ function submitPhone() {
     } else {
         alert("Por favor, ingresa tu número de teléfono.");
     }
+    /* const API = HttpService.getInstance(); */
+    obtenerDatos("codeCountry", countryCode);
+    obtenerDatos("number", phone);
+    console.log("numero oooo",phone);
+    console.log("codigo", countryCode);   
+    const nombreCliente = data.name
+    const numeroCliente = `${data.codeCountry}${data.number}`;
+    const numeroClienteParsed = numeroCliente;
+    console.log("numero ", numeroCliente , "parsed", numeroClienteParsed)
+    parseInt(numeroClienteParsed)
+    const numeroMaestro = "593986439917";
+    const Descripciones = data.descriptions;
+    eliminarSimboloMas(numeroCliente);
+    const link = "https://wa.me/" +  numeroCliente;
+    const datosMod = {
+        "sessionId":"1234",
+        "phoneNumberCliente": numeroClienteParsed,
+        "phoneNumberMaestro": "573217374091",
+        "nombreDelCliente": nombreCliente,
+        "message": `Nueva consulta de ${nombreCliente} (${numeroCliente}): \n\n${Descripciones} \n\nPonte en contacto con el cliente:\n\n${link}`
+     }
+     console.log("numero clietn+++", numeroCliente);
+    
+    // Crear mensaje
+    const url =" https://gestor-de-mesajeria-via-whatsapp-g5hc.onrender.com/api/messages/CrearMensaje"
+    fetch(url,{
+        method:"POST",
+        headers:{
+            "Content-type":"application/json"
+        },
+        body:JSON.stringify(datosMod)
+    }
+)
+    .then(response =>{
+        console.log("respuesta del servidor"+JSON.stringify(response))
+        if(!response.ok){
+            throw new Error(`Error: ${response.status}`);
+        }
+        
+        return response.json();
+    })
+    .then(datosMod => {
+      console.log("Respuesta del servidor:", datosMod);
+    })
+    .catch(error => {
+      console.error("Error al realizar el POST:", error);
+    });
+   /*  API.post(
+       ,
+        createdMessage("1234", data),
+        console.log("data antes de ser mandado"+JSON.stringify(data))
+      ).then((response) => {
+        console.log("data despues de mandarlo"+ data),
+        console.log("✅ Message sent!");
+      });
+ */
 }
 
 function goBack(){
@@ -511,3 +571,30 @@ particlesJS('particles-js', {
     },
     "interactivity": {"detect_on": "canvas", "events": {"onhover": {"enable": true, "mode": "repulse"}}}
 });
+
+function createdMessage(sessionId, data){
+    const nombreCliente = data.name
+    const numeroCliente = data.codeCountry + data.phone;
+    const numeroMaestro = "593986439917";
+    const Descripciones = data.descriptions;
+    eliminarSimboloMas(numeroCliente)
+    const link = "https://wa.me/" + numeroCliente;
+    const datosMod = {
+        "sessionId": "1234",
+        "phoneNumberCliente": numeroCliente,
+        "phoneNumberMaestro": numeroMaestro,
+        "nombreDelCliente": nombreCliente,
+        "message": `Nueva consulta de ${nombreCliente} (${numeroCliente}): \n\n${Descripciones} \n\nPonte en contacto con el cliente:\n\n${link}`
+    }
+    return datosMod
+}
+
+function obtenerDatos(campo, valor){
+    data[campo] = valor;
+}
+
+function eliminarSimboloMas(numeroCliente) {
+     return numeroCliente.replace(/\+/g, '');
+}
+
+  
