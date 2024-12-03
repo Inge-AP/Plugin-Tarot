@@ -1,10 +1,16 @@
-
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    overflow: hidden;
+    color: #ffffff;
+}
 
 #particles-js {
     position: absolute;
     width: 100%;
     height: 100%;
-    /*background-image: url("../Cartas/IMAGEN-ORIGEN-scaled-1.webp");*/
+    background-image: url("../Cartas/IMAGEN-ORIGEN-scaled-1.webp");
     background-size: cover;
     z-index: -1;
     top: 0;
@@ -102,7 +108,7 @@ h3 {
 .card {
     width: 120px; 
     height: 200px; 
-    /*background-image: url("../Cartas/card-back.webp");*/
+    background-image: url("../Cartas/card-back.webp");
     transform: scaleX(-1);
     background-size: cover;
     border: 1px solid #ccc;
@@ -164,7 +170,26 @@ h3 {
     position: relative;
     top: -60px;
 }
+.blinking-arrow {
+    color: #ffc552;
+    height: 100%;
+    font-size: xxx-large;
+    margin-top: -50px;
+    animation: fadeInOut 1.5s infinite alternate; /* Animación de desvanecimiento */
+  }
 
+  /* Definición de la animación */
+  @keyframes fadeInOut {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 .result-panel .card-names {
     position: relative;
     top: -50px;
@@ -196,8 +221,8 @@ h3 {
 }
 
 .selected-card {
-    width: 120px; 
-    height: 200px; 
+    width: 80px; 
+    height: 130px; 
     background-color: #ffffff; /* Color blanco para las cartas seleccionadas */
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -207,14 +232,24 @@ h3 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.5s;
     opacity: 0; /* Inicialmente invisibles */
-
+    transform: scale(0.8);
 }
+
 
 .selected-card.flip {
     transform: rotateY(180deg); /* Rotación para revelar la carta */
     opacity: 1; /* Hacer visible la carta al girar */
+ /*    margin-left: -20px */
 }
-
+@media screen and (max-width: 450px) {
+    .selected-card.flip{
+        width: 100px;
+        position: relative;
+    }
+    .card{
+        background-size: cover;
+    }
+}
 .boton-habla {
     padding: 15px 40px; /* Ajuste leve en el relleno para mantener proporción */
     font-size: 20px;
@@ -248,14 +283,13 @@ h3 {
     overflow-y: auto; /* Habilita el desplazamiento vertical */
     padding: 20px;
 }
-
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #000000;
     overflow: hidden;
     color: #ffffff;
-    /*background-image: url("../Cartas/IMAGEN-ORIGEN-scaled-1.webp");*/ /* Reemplaza con la URL de tu imagen */
+    background-image: url("../Cartas/IMAGEN-ORIGEN-scaled-1.webp"); /* Reemplaza con la URL de tu imagen */
     background-size: cover; /* Para cubrir toda la pantalla */
     background-repeat: no-repeat; /* Evitar que la imagen se repita */
     background-attachment: fixed; /* Mantener la imagen fija en la pantalla */
