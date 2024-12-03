@@ -384,7 +384,6 @@ function displayResult() {
     descriptions.textContent = descriptionsText; // Mostrar descripciones en una sola línea
 // Añadir cada carta seleccionada al contenedor con un efecto "flip" escalonado
     obtenerDatos("descriptions", descriptionsText);
-    console.log(descriptionsText);
     selectedCards.forEach((card, index) => {
         
         // Crear un nuevo elemento para cada carta
@@ -405,7 +404,6 @@ function displayResult() {
     });
 
     }, 800);
-    console.log(data);
 }
 
 //Inicio de la mensajería
@@ -453,7 +451,6 @@ function startMensajeria() {
         nameErrorMessage.classList.add("none");
     }
     obtenerDatos("name", name);
-    console.log(name);
     // Continúa con la siguiente pantalla si el nombre es válido
     document.getElementById("formContainer").classList.remove("show"); // Ocultar pantalla 
     setTimeout(() => {
@@ -469,7 +466,6 @@ function validatePhone() {
     const phone = phoneInput.value;
     // Elimina cualquier caracter no numérico
     phoneInput.value = phone.replace(/\D/g, '');
-    console.log(phoneInput)
 }
 
 function submitPhone() {
@@ -500,12 +496,9 @@ function submitPhone() {
     /* const API = HttpService.getInstance(); */
     obtenerDatos("codeCountry", countryCode);
     obtenerDatos("number", phone);
-    console.log("numero oooo",phone);
-    console.log("codigo", countryCode);   
     const nombreCliente = data.name
     const numeroCliente = `${data.codeCountry}${data.number}`;
     const numeroClienteParsed = numeroCliente;
-    console.log("numero ", numeroCliente , "parsed", numeroClienteParsed)
     parseInt(numeroClienteParsed)
     const numeroMaestro = "593986439917";
     const Descripciones = data.descriptions;
@@ -518,7 +511,6 @@ function submitPhone() {
         "nombreDelCliente": nombreCliente,
         "message": `Nueva consulta de ${nombreCliente} (${numeroCliente}): \n\n${Descripciones} \n\nPonte en contacto con el cliente:\n\n${link}`
      }
-     console.log("numero clietn+++", numeroCliente);
     
     // Crear mensaje
     const url =" https://gestor-de-mesajeria-via-whatsapp-g5hc.onrender.com/api/messages/CrearMensaje"
@@ -544,15 +536,6 @@ function submitPhone() {
     .catch(error => {
       console.error("Error al realizar el POST:", error);
     });
-   /*  API.post(
-       ,
-        createdMessage("1234", data),
-        console.log("data antes de ser mandado"+JSON.stringify(data))
-      ).then((response) => {
-        console.log("data despues de mandarlo"+ data),
-        console.log("✅ Message sent!");
-      });
- */
 }
 
 function goBack(){
