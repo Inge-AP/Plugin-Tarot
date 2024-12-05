@@ -823,7 +823,7 @@ function submitPhone() {
   const numeroCliente = `${data.codeCountry}${data.number}`;
   const numeroClienteParsed = numeroCliente;
   parseInt(numeroClienteParsed);
-  const numeroMaestro = "573143127342";
+  const numeroMaestro = "+50766656100";
   const numeroMaestroParsed = numeroMaestro;
   parseInt(numeroMaestroParsed);
   const Descripciones = data.descriptions;
@@ -889,22 +889,7 @@ particlesJS("particles-js", {
   },
 });
 
-function createdMessage(sessionId, data) {
-  const nombreCliente = data.name;
-  const numeroCliente = data.codeCountry + data.phone;
-  const numeroMaestro = "593986439917";
-  const Descripciones = data.descriptions;
-  eliminarSimboloMas(numeroCliente);
-  const link = "https://wa.me/" + numeroCliente;
-  const datosMod = {
-    sessionId: "1234",
-    phoneNumberCliente: numeroCliente,
-    phoneNumberMaestro: numeroMaestro,
-    nombreDelCliente: nombreCliente,
-    message: `Nueva consulta de ${nombreCliente} (${numeroCliente}): \n\n${Descripciones} \n\nPonte en contacto con el cliente:\n\n${link}`,
-  };
-  return datosMod;
-}
+
 
 function obtenerDatos(campo, valor) {
   data[campo] = valor;
