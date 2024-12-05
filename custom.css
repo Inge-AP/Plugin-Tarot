@@ -1,0 +1,229 @@
+.page{
+    position: absolute;
+    width: 100%;
+  
+    background-image: url("/images/IMAGEN-ORIGEN-scaled-1.webp");
+    background-size: cover;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+	height: calc(100vh - var(--scrollbar-height, 0px));
+    overflow-y: hidden;
+    margin: 0;
+    padding: 0;
+    background-position: center; 
+	
+} 
+.card {
+            width: 120px; 
+            height: 200px; 
+            background-image: url("http://panama.tarot-latinoamerica.com/wp-content/uploads/2024/09/TLat-Reverso-Carta.webp");
+            transform: scaleX(-1);
+            background-size: cover;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            position: absolute;
+            transform-origin: bottom center;
+            transition: transform 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: bold;
+            opacity: 0; 
+}
+
+input[type="text"], textarea, select {
+       border-radius: 5px !important;
+	padding: 10px !important;
+	color: #000;
+	border: none;
+	font-family: Arial, sans-serif,
+}
+
+h1 {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 60px;
+    color: #ffffff;
+    text-shadow: 1px 1px 4px rgba(255, 215, 0, 0.6);
+	  font-weight: bold;
+}
+
+h2 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    margin-top: 40px;
+    font-size: 60px;
+    color: #ffffff;
+    text-shadow: 1px 1px 4px rgba(255, 215, 0, 0.6);
+	font-weight: bold;
+}
+
+h3, h4 {
+    /* Remover la posición absoluta */
+    position: relative; /* O simplemente eliminar esta línea */
+    /* Asegurar que el título esté debajo de las cartas */
+    margin-top: 20px; /* Ajusta el espacio que desees */
+    text-align: center;
+    font-size: 60px;
+    color: #ffffff;
+    text-shadow: 1px 1px 4px rgba(255, 215, 0, 0.6);
+	font-weight: bold
+}
+
+.start-button {
+    padding: 15px 30px;
+    font-size: 20px;
+    color: white;
+    background: linear-gradient(135deg, #e2ac3d, #ffc552);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+    transition: all 0.3s ease;
+    margin: 10px 0;
+    width: 200px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* PAYWALL  */
+
+/*Cuerpo*/
+body {
+	text-align: center;
+}
+
+/*Contenedor Paywall*/
+.wc_ppp_paywall.wc_ppp_paywall_1642 {
+	background-color: var(--e-global-color-560eb5f);
+	background-image: url(http://panama.tarot-latinoamerica.com/wp-content/uploads/2024/09/TLat-Contenido-Fondo-1.webp);
+	background-position: center;
+	background-repeat: repeat;
+	background-size: 7%;
+	background-attachment: fixed;
+	padding: 100px;
+	width: 100%;
+}
+
+@media (max-width: 768px) {
+.wc_ppp_paywall.wc_ppp_paywall_1642 {
+	background-position: center;
+	background-repeat: repeat;
+	background-size: 15%;
+	background-attachment: fixed;
+	padding: 75px;
+}
+}
+
+@media (max-width: 425px) {
+.wc_ppp_paywall.wc_ppp_paywall_1642 {
+	background-size: 20%;
+	padding: 75px 25px 100px 25px;
+	width: 100%;
+}
+}
+
+ /*Producto Woocommerce*/
+.woocommerce ul.products li.product {
+	float: none;
+    margin: auto;
+    padding: 50px 50px 15px 50px;
+    position: relative;
+    width: 30%;
+    background-color: var(--e-global-color-e40b386);
+    border-radius: 50px;
+	filter: drop-shadow(var(--e-global-color-98ab712) 0px 0px 5px);
+	transition: filter 0.25s;
+
+}
+
+.woocommerce ul.products li.product:hover {
+	filter: drop-shadow(var(--e-global-color-e40b386) 0px 0px 10px);
+}
+
+@media (max-width: 1440px) {
+.woocommerce ul.products li.product {
+	width: 50%;
+}
+}
+
+@media (max-width: 425px) {
+.woocommerce ul.products li.product {
+    padding: 25px 25px 1px 25px;
+
+	border-radius: 35px;
+}
+}
+
+/*Imagen Producto*/
+.elementor-kit-92 img {
+    border-radius: 25px;
+    margin-bottom: -35px;
+}
+
+
+/*Título Producto*/
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+	color: var(--e-global-color-560eb5f);
+	font-family: var(--e-global-typography-5a5b261-font-family), serif;
+	font-size: var(--e-global-typography-5a5b261-font-size);
+	font-weight: var(--e-global-typography-5a5b261-font-weight);
+	font-style: var(--e-global-typography-5a5b261-font-style);
+	margin: -25px 0px 0px 0px;
+	position: inherit;
+	text-shadow: 0px 0px 0px #00000000;
+}
+
+/*Precio Producto*/
+.woocommerce ul.products li.product .price {
+	color: var(--e-global-color-e40b386);
+	font-family: "Quicksand", sans-serif;
+    font-size: 30px;
+ 	font-weight: 700;
+  	font-style: normal;
+	padding: 10px;
+	background-color: var(--e-global-color-accent);
+	border-radius: 50px;
+	width: 50%;
+	margin: auto;
+}
+
+@media (max-width: 425px) {
+.woocommerce ul.products li.product .price {
+	width: 75%;
+}
+}
+
+/*Botón Comprar Ahora*/
+.woocommerce ul.products li.product .button {
+	color: var(--e-global-color-560eb5f);
+	font-family: var(--e-global-typography-accent-font-family), sans-serif;
+    font-size: var(--e-global-typography-accent-font-size);
+ 	font-weight: var(--e-global-typography-accent-font-weight);
+
+	border-radius: 0px;
+	background-color: var(--e-global-color-98ab712);
+	margin-top: 0px;
+	border: 1px dashed var(--e-global-color-560eb5f);
+	transform: skew(0deg, 0deg);
+	transition: border 0.25s, transform 0.25s;
+}
+
+.woocommerce ul.products li.product .button:hover {
+	border: 1px dashed var(--e-global-color-accent);
+	transform: skew(-10deg, 0deg);
+}
